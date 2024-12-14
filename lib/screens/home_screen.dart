@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final DatabaseHelpar? _databaseHelpar = DatabaseHelpar();
+  final DatabaseHelpar _databaseHelpar = DatabaseHelpar();
   List<Note> _notes = [];
   final List<Color> _noteColors = [
     Colors.amber,
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadNotes() async {
-    final notes = await _databaseHelpar!.getNotes();
+    final notes = await _databaseHelpar.getNotes();
     setState(() {
       _notes = notes;
     });
@@ -49,81 +49,84 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Notepad'),
         centerTitle: true,
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
-        itemCount: _notes.length,
-        itemBuilder: (context, index) {
-          final note = _notes[index];
-          final color = Color(int.parse(note.color));
-          return GestureDetector(
-            onTap: () async {
-              await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ViewNoteScreens(note: note),
-                  ));
-              _loadNotes();
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 4,
-                      offset: Offset(0, 2),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
+          itemCount: _notes.length,
+          itemBuilder: (context, index) {
+            final note = _notes[index];
+            final color = Color(int.parse(note.color));
+            return GestureDetector(
+              onTap: () async {
+                await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ViewNoteScreens(note: note),
+                    ));
+                _loadNotes();
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      )
+                    ]),
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      note.title,
+                      style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      note.content,
+                      style: const TextStyle(fontSize: 14, color: Colors.white70),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const Spacer(),
+                    Text(
+                      _formatDateTime(note.dateTime),
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     )
-                  ]),
-              padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    note.title,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    note.content,
-                    style: TextStyle(fontSize: 14, color: Colors.white70),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Spacer(),
-                  Text(
-                    _formatDateTime(note.dateTime),
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddEditNoteScreens(),
+                builder: (context) => const AddEditNoteScreens(),
               ));
           _loadNotes();
         },
-        child: Icon(Icons.add),
-        backgroundColor: Color(0xff50c878),
+        backgroundColor: const Color(0xff50c878),
         foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
       ),
     );
   }

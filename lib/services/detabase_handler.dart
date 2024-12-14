@@ -1,7 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:fast_notepad/model/notes_model.dart';
 import 'package:path/path.dart' show join;
-import 'dart:io' as io;
 
 class DatabaseHelpar {
   static final DatabaseHelpar _instance = DatabaseHelpar._internal();

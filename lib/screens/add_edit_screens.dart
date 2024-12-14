@@ -1,4 +1,5 @@
 import 'package:fast_notepad/model/notes_model.dart';
+import 'package:fast_notepad/screens/home_screen.dart';
 import 'package:fast_notepad/services/detabase_handler.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     TextFormField(
@@ -64,7 +65,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
                         return null;
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     TextFormField(
@@ -84,7 +85,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
                       },
                     ),
                     Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
@@ -96,7 +97,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
                                 child: Container(
                                   height: 40,
                                   width: 40,
-                                  margin: EdgeInsets.only(right: 8),
+                                  margin: const EdgeInsets.only(right: 8),
                                   decoration: BoxDecoration(
                                     color: color,
                                     shape: BoxShape.circle,
@@ -116,16 +117,16 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
                     InkWell(
                       onTap: () {
                         _saveNote();
-                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),),);
                       },
                       child: Container(
-                        margin: EdgeInsets.all(20),
-                        padding: EdgeInsets.all(16),
+                        margin: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Color(0xff50c878),
+                          color: const Color(0xff50c878),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Save Note',
                             style: TextStyle(
