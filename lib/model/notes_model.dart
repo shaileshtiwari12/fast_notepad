@@ -1,11 +1,11 @@
-class Note {
+class NotesModel {
   final int? id;
   final String title;
   final String content;
   final String color;
   final String dateTime;
 
-  Note({
+  NotesModel({
     this.id,
     required this.title,
     required this.content,
@@ -23,9 +23,9 @@ class Note {
     };
   }
 
-  factory Note.fromMap(
+  factory NotesModel.fromMap(
     Map<String, dynamic> map){
-      return  Note(
+      return  NotesModel(
         id: map['id'],
         title: map['title'],
         content: map['content'],

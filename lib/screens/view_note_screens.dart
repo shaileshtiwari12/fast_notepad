@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class ViewNoteScreens extends StatelessWidget {
   ViewNoteScreens({super.key, required this.note});
-  final Note note;
+  final NotesModel note;
 
   final DatabaseHelpar _databaseHelpar = DatabaseHelpar();
 

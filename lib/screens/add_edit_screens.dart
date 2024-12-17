@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class AddEditNoteScreens extends StatefulWidget {
   const AddEditNoteScreens({super.key, this.note});
-  final Note? note;
+  final NotesModel? note;
   @override
   State<AddEditNoteScreens> createState() => _AddEditNoteScreensState();
 }
 
 class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
   final DatabaseHelpar _databaseHelpar = DatabaseHelpar();
@@ -21,6 +21,18 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
     Colors.red,
     Colors.pink,
     Colors.green,
+    const Color.fromARGB(255, 89, 54, 244),
+    const Color.fromARGB(255, 30, 192, 233),
+    const Color.fromARGB(255, 4, 251, 12),
+    const Color.fromARGB(255, 228, 244, 54),
+    const Color.fromARGB(255, 213, 30, 233),
+    const Color.fromARGB(255, 245, 155, 30),
+    const Color.fromARGB(255, 22, 67, 0),
+    const Color.fromARGB(255, 78, 5, 61),
+    const Color.fromARGB(255, 9, 31, 10),
+    const Color.fromARGB(255, 5, 52, 112),
+    const Color.fromARGB(255, 32, 24, 32),
+    const Color.fromARGB(255, 150, 86, 3),
   ];
   @override
   void initState() {
@@ -41,9 +53,69 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
         title: Text(
           widget.note == null ? 'Add Note' : 'Edit Note',
         ),
+        actions: [
+          IconButton(
+            // key: _formKey,
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: GridView(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5),
+                      children: _colors.map(
+                        (color) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() => _selectedColor = color);
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              margin: const EdgeInsets.only(right: 8),
+                              decoration: BoxDecoration(
+                                color: color,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: _selectedColor == color
+                                        ? Colors.black45
+                                        : Colors.transparent,
+                                    width: 2),
+                              ),
+                            ),
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(Icons.color_lens),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: IconButton(
+              onPressed: () async{
+                _saveNote();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.done),
+            ),
+          ),
+        ],
       ),
       body: Form(
-          key: _formKey,
+          // key: _formKey,
           child: Column(
             children: [
               Padding(
@@ -52,91 +124,30 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
                   children: [
                     TextFormField(
                       controller: _titleController,
-                      decoration: InputDecoration(
-                        hintText: 'Title',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                      decoration: const InputDecoration(
+                        hintText: 'Title...',
+                        border: InputBorder.none,
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a title';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter a title';
+                      //   }
+                      //   return null;
+                      // },
                     ),
                     TextFormField(
                       controller: _contentController,
-                      decoration: InputDecoration(
-                        hintText: 'Content',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                      decoration: const InputDecoration(
+                        hintText: 'Content...',
+                        border: InputBorder.none,
                       ),
-                      maxLines: 10,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a content';
-                        }
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter a content';
+                      //   }
+                      //   return null;
+                      // },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: _colors.map(
-                            (color) {
-                              return GestureDetector(
-                                onTap: () =>
-                                    setState(() => _selectedColor = color),
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  margin: const EdgeInsets.only(right: 8),
-                                  decoration: BoxDecoration(
-                                    color: color,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color: _selectedColor == color
-                                            ? Colors.black45
-                                            : Colors.transparent,
-                                        width: 2),
-                                  ),
-                                ),
-                              );
-                            },
-                          ).toList(),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        _saveNote();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(),),);
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(20),
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff50c878),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Save Note',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -146,8 +157,8 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
   }
 
   Future<void> _saveNote() async {
-    if (_formKey.currentState!.validate()) {
-      final note = Note(
+    // if (_formKey.currentState!.validate()) {
+      final note = NotesModel(
         id: widget.note?.id,
         title: _titleController.text,
         content: _contentController.text,
@@ -159,6 +170,6 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
       } else {
         await _databaseHelpar.updateNote(note);
       }
-    }
+    // }
   }
 }
