@@ -56,8 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         drawer: const DrawerPage(),
         appBar: AppBar(
+          backgroundColor: Colors.white,
           title: const Text('Notepad'),
           centerTitle: true,
         ),
@@ -129,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xffF73669),
           onPressed: () async {
             await Navigator.push(
                 context,
@@ -137,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ));
             _loadNotes();
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.add, color: Colors.white,),
         ),
       ),
     );

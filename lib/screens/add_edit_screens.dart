@@ -50,12 +50,12 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        centerTitle: true,
         title: Text(
           widget.note == null ? 'Add Note' : 'Edit Note',
         ),
         actions: [
           IconButton(
-            // key: _formKey,
             onPressed: () {
               showDialog(
                 context: context,
@@ -100,7 +100,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
-              onPressed: () async{
+              onPressed: () async {
                 _saveNote();
                 Navigator.push(
                   context,
@@ -114,62 +114,50 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
           ),
         ],
       ),
-      body: Form(
-          // key: _formKey,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _titleController,
-                      decoration: const InputDecoration(
-                        hintText: 'Title...',
-                        border: InputBorder.none,
-                      ),
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Please enter a title';
-                      //   }
-                      //   return null;
-                      // },
-                    ),
-                    TextFormField(
-                      controller: _contentController,
-                      decoration: const InputDecoration(
-                        hintText: 'Content...',
-                        border: InputBorder.none,
-                      ),
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Please enter a content';
-                      //   }
-                      //   return null;
-                      // },
-                    ),
-                  ],
+              TextFormField(
+style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                minLines: 1,
+                maxLines: 2,
+                controller: _titleController,
+                decoration: const InputDecoration(
+                  hintText: 'Title...',
+                  border: InputBorder.none,
+                ),
+              ),
+              TextFormField(
+                maxLines: 500,
+                style: const TextStyle(fontSize: 16,letterSpacing: 0.1,),
+                keyboardType: TextInputType.multiline,
+                controller: _contentController,
+                decoration: const InputDecoration(
+                  hintText: 'Content...',
+                  border: InputBorder.none,
                 ),
               ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 
   Future<void> _saveNote() async {
-    // if (_formKey.currentState!.validate()) {
-      final note = NotesModel(
-        id: widget.note?.id,
-        title: _titleController.text,
-        content: _contentController.text,
-        color: _selectedColor.value.toString(),
-        dateTime: DateTime.now().toString(),
-      );
-      if (widget.note == null) {
-        await _databaseHelpar.insertNote(note);
-      } else {
-        await _databaseHelpar.updateNote(note);
-      }
-    // }
+    final note = NotesModel(
+      id: widget.note?.id,
+      title: _titleController.text,
+      content: _contentController.text,
+      color: _selectedColor.value.toString(),
+      dateTime: DateTime.now().toString(),
+    );
+    if (widget.note == null) {
+      await _databaseHelpar.insertNote(note);
+    } else {
+      await _databaseHelpar.updateNote(note);
+    }
   }
 }

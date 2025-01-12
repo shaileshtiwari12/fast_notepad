@@ -38,6 +38,7 @@ dependencies:
   sqflite:
   path_provider: 
   url_launcher:
+  google_mobile_ads:
 
 dev_dependencies:
   flutter_test:

@@ -63,7 +63,7 @@ class ViewNoteScreens extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -71,7 +71,7 @@ class ViewNoteScreens extends StatelessWidget {
                     note.title,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 28,
+                      fontSize: 20,
                       color: Colors.white,
                     ),
                   ),

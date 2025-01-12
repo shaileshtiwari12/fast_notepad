@@ -25,7 +25,7 @@ class DrawerPage extends StatelessWidget {
             title: const Text('Privacy and Policy'),
           ),
           const SizedBox(height: 50,),
-          Divider(),
+          const Divider(),
           const Text('Version 1.2.0',style: TextStyle(fontSize: 12),)
         ],
       ),
