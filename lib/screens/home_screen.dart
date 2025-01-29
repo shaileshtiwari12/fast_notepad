@@ -1,3 +1,4 @@
+import 'package:fast_notepad/ads/bannerAds.dart';
 import 'package:fast_notepad/screens/add_edit_screens.dart';
 import 'package:fast_notepad/screens/drawer_page.dart';
 import 'package:fast_notepad/screens/view_note_screens.dart';
@@ -63,75 +64,86 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('Notepad'),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
-            itemCount: _notes.length,
-            itemBuilder: (context, index) {
-              final note = _notes[index];
-              final color = Color(int.parse(note.color));
-              return GestureDetector(
-                onTap: () async {
-                  await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ViewNoteScreens(note: note),
-                      ));
-                  _loadNotes();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        )
-                      ]),
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        note.title,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+        body: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
+                  itemCount: _notes.length,
+                  itemBuilder: (context, index) {
+                    final note = _notes[index];
+                    final color = Color(int.parse(note.color));
+                    return GestureDetector(
+                      onTap: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewNoteScreens(note: note),
+                            ));
+                        _loadNotes();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
+                              )
+                            ]),
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              note.title,
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              note.content,
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.white70),
+                              maxLines: 4,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const Spacer(),
+                            Text(
+                              _formatDateTime(note.dateTime),
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        note.content,
-                        style: const TextStyle(
-                            fontSize: 14, color: Colors.white70),
-                        maxLines: 4,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const Spacer(),
-                      Text(
-                        _formatDateTime(note.dateTime),
-                        style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
+              ),
+            ),
+             Container(
+              color: Colors.white,
+              width: double.infinity,
+              height: 50,
+              child: const BannerAds()),
+          ],
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(0xffF73669),
+          backgroundColor: const Color(0xffF73669),
           onPressed: () async {
             await Navigator.push(
                 context,
@@ -140,7 +152,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ));
             _loadNotes();
           },
-          child: const Icon(Icons.add, color: Colors.white,),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
     );
