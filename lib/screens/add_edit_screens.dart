@@ -118,6 +118,53 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
     const Color(0xFF191970), // Midnight Blue
     const Color(0xFFF5FFFA), // Mint Cream
     const Color(0xFFFFE4B5), // Moccasin
+    const Color(0xFFFFDEAD), // Navajo White
+    const Color(0xFF000080), // Navy
+    const Color(0xFFFDF5E6), // Old Lace
+    const Color(0xFF808000), // Olive
+    const Color(0xFF6B8E23), // Olive Drab
+    const Color(0xFFFFA500), // Orange
+    const Color(0xFFFF4500), // Orange Red
+    const Color(0xFFDA70D6), // Orchid
+    const Color(0xFFEEE8AA), // Pale Goldenrod
+    const Color(0xFF98FB98), // Pale Green
+    const Color(0xFFAFEEEE), // Pale Turquoise
+    const Color(0xFFDB7093), // Pale Violet Red
+    const Color(0xFFFFEFD5), // Papaya Whip
+    const Color(0xFFFFDAB9), // Peach Puff
+    const Color(0xFFCD853F), // Peru
+    const Color(0xFFFFC0CB), // Pink
+    const Color(0xFFDDA0DD), // Plum
+    const Color(0xFFB0E0E6), // Powder Blue
+    const Color(0xFF800080), // Purple
+    const Color(0xFFFF0000), // Red
+    const Color(0xFFBC8F8F), // Rosy Brown
+    const Color(0xFF4169E1), // Royal Blue
+    const Color(0xFF8B4513), // Saddle Brown
+
+    const Color(0xFFFA8072), // Salmon
+    const Color(0xFFF4A460), // Sandy Brown
+    const Color(0xFF2E8B57), // Sea Green
+    const Color(0xFFFFF5EE), // Sea Shell
+    const Color(0xFFA0522D), // Sienna
+    const Color(0xFFC0C0C0), // Silver
+    const Color(0xFF87CEEB), // Sky Blue
+    const Color(0xFF6A5ACD), // Slate Blue
+    const Color(0xFF708090), // Slate Gray
+    const Color(0xFFFFFAFA), // Snow
+    const Color(0xFF00FF7F), // Spring Green
+    const Color(0xFF4682B4), // Steel Blue
+    const Color(0xFFD2B48C), // Tan
+    const Color(0xFF008080), // Teal
+    const Color(0xFFD8BFD8), // Thistle
+    const Color(0xFFFF6347), // Tomato
+    const Color(0xFF40E0D0), // Turquoise
+    const Color(0xFFEE82EE), // Violet
+    const Color(0xFFF5DEB3), // Wheat
+    const Color(0xFFFFFFFF), // White
+    const Color(0xFFF5F5F5), // White Smoke
+    const Color(0xFFFFFF00), // Yellow
+    const Color(0xFF9ACD32), // Yellow Green
   ];
   @override
   void initState() {
