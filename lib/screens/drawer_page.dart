@@ -26,7 +26,7 @@ class DrawerPage extends StatelessWidget {
           ),
           const SizedBox(height: 50,),
           const Divider(),
-          const Text('Version 1.4.0',style: TextStyle(fontSize: 12),)
+          const Text('Version 1.5.0',style: TextStyle(fontSize: 12),)
         ],
       ),
     );

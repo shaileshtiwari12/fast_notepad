@@ -16,12 +16,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final DatabaseHelpar _databaseHelpar = DatabaseHelpar();
   List<NotesModel> _notes = [];
-  final List<Color> _noteColors = [
-    Colors.amber,
-    Colors.red,
-    Colors.pink,
-    Colors.green,
-  ];
   @override
   void initState() {
     super.initState();
@@ -71,7 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16),
                   itemCount: _notes.length,
                   itemBuilder: (context, index) {
                     final note = _notes[index];
@@ -135,11 +131,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-             Container(
+            Container(
               color: Colors.white,
               width: double.infinity,
               height: 50,
-              child: const BannerAds()),
+              child: const BannerAds(),
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
