@@ -15,7 +15,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
   final DatabaseHelpar _databaseHelpar = DatabaseHelpar();
-  Color _selectedColor = Colors.amber;
+  Color _selectedColor = Colors.pink;
   final List<Color> _colors = [
     const Color(0xffFFB6C1),
     const Color(0xffADD8E6),
@@ -187,6 +187,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
           widget.note == null ? 'Add Note' : 'Edit Note',
         ),
         actions: [
+     
           IconButton(
             onPressed: () {
               showDialog(
@@ -296,4 +297,6 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
       await _databaseHelpar.updateNote(note);
     }
   }
+
+ 
 }
