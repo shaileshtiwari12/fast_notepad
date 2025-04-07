@@ -1,0 +1,1 @@
+C:\my app\fast_notepad\build\app\intermediates\cxx\RelWithDebInfo\6g5x1v4j\obj\arm64-v8a

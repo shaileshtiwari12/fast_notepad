@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -5,6 +6,7 @@ class BannerAds extends StatefulWidget {
   const BannerAds({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _BannerAdsState createState() => _BannerAdsState();
 }
 

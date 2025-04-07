@@ -1,0 +1,2 @@
+C:/my app/fast_notepad/android/app/.cxx/RelWithDebInfo/6g5x1v4j/x86_64/CMakeFiles/edit_cache.dir
+C:/my app/fast_notepad/android/app/.cxx/RelWithDebInfo/6g5x1v4j/x86_64/CMakeFiles/rebuild_cache.dir
