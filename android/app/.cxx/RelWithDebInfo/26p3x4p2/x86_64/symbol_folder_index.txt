@@ -1,0 +1,1 @@
+C:\my all app\fast_notepad\build\app\intermediates\cxx\RelWithDebInfo\26p3x4p2\obj\x86_64

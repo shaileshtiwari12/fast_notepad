@@ -39,6 +39,7 @@ dependencies:
   path_provider: 
   url_launcher:
   google_mobile_ads:
+  change_app_package_name:
 
 dev_dependencies:
   flutter_test:
