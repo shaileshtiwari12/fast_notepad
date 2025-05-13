@@ -1,6 +1,5 @@
 import 'package:fast_notepad/ads/bannerAds.dart';
 import 'package:fast_notepad/screens/add_edit_screens.dart';
-import 'package:fast_notepad/screens/drawer_page.dart';
 import 'package:fast_notepad/screens/view_note_screens.dart';
 import 'package:fast_notepad/services/detabase_handler.dart';
 import 'package:fast_notepad/model/notes_model.dart';
@@ -52,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        drawer: const DrawerPage(),
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: const Text('Notepad'),
