@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:fast_notepad/model/notes_model.dart';
 import 'package:fast_notepad/screens/add_edit_screens.dart';
 import 'package:fast_notepad/services/detabase_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ViewNoteScreens extends StatelessWidget {
   ViewNoteScreens({super.key, required this.note});
@@ -13,13 +16,19 @@ class ViewNoteScreens extends StatelessWidget {
     final DateTime dt = DateTime.parse(dateTime);
     final now = DateTime.now();
     if (dt.year == now.year && dt.month == now.month && dt.day == now.day) {
-      return 'Today, ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(0, '0')}';
+      return 'Today, ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
     }
-    return ' ${dt.day}/${dt.month}/${dt.year}, ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(0, '0')}';
+    return '${dt.day}/${dt.month}/${dt.year}, ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness:
+          note.color == '4294967295' ? Brightness.dark : Brightness.light,
+    ));
+
     return Scaffold(
       backgroundColor: Color(int.parse(note.color)),
       appBar: AppBar(
@@ -28,7 +37,7 @@ class ViewNoteScreens extends StatelessWidget {
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.white,
           ),
         ),
@@ -63,7 +72,7 @@ class ViewNoteScreens extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -71,7 +80,7 @@ class ViewNoteScreens extends StatelessWidget {
                     note.title,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 24,
                       color: Colors.white,
                     ),
                   ),
@@ -83,7 +92,7 @@ class ViewNoteScreens extends StatelessWidget {
                       const Icon(
                         Icons.access_time,
                         size: 16,
-                        color: Colors.white,
+                        color: Colors.white70,
                       ),
                       const SizedBox(
                         width: 8,
@@ -92,7 +101,7 @@ class ViewNoteScreens extends StatelessWidget {
                         _formatDateTime(note.dateTime),
                         style: const TextStyle(
                           fontSize: 14,
-                          color: Colors.white,
+                          color: Colors.white70,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -113,12 +122,16 @@ class ViewNoteScreens extends StatelessWidget {
                   ),
                 ),
                 child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(
-
+                  physics: const BouncingScrollPhysics(),
+                  child: Text(
+                    note.content,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Color(0xff333333),
+                      height: 1.6,
+                      letterSpacing: 0.2,
+                    ),
                   ),
-                  child: Text(note.content,style: const TextStyle(
-                    fontSize: 16,color: Colors.black,height: 1.6,letterSpacing: 0.2,
-                  ),),
                 ),
               ),
             ),
@@ -140,7 +153,7 @@ class ViewNoteScreens extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         content: const Text(
-          'Are you sure you want to Delete this Note',
+          'Are you sure you want to delete this note? This action cannot be undone.',
           style: TextStyle(color: Colors.black54, fontSize: 16),
         ),
         actions: [
@@ -149,15 +162,25 @@ class ViewNoteScreens extends StatelessWidget {
             child: Text(
               'Cancel',
               style: TextStyle(
-                  color: Colors.grey[600], fontWeight: FontWeight.w600),
+                color: Colors.grey[600],
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
-          TextButton(
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.redAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
             onPressed: () => Navigator.pop(context, true),
             child: const Text(
               'Delete',
               style: TextStyle(
-                  color: Colors.redAccent, fontWeight: FontWeight.w600),
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],

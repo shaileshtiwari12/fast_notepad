@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -32,7 +33,11 @@ class _BannerAdsState extends State<BannerAds> {
           });
         },
         onAdFailedToLoad: (ad, error) {
-          print('Failed to load a banner ad: ${error.message}');
+          if (kDebugMode) {
+            if (kDebugMode) {
+              print('Failed to load a banner ad: ${error.message}');
+            }
+          }
           ad.dispose();
         },
       ),
