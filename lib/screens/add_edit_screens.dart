@@ -50,6 +50,7 @@ class _AddEditNoteScreensState extends State<AddEditNoteScreens> {
         ),
         title: Text(
           widget.note == null ? 'Add Note' : 'Edit Note',
+          
           style: const TextStyle(
             color: Color(0xff1A1A1A),
             fontWeight: FontWeight.bold,
